@@ -14,7 +14,7 @@ class GetFirstQuestion extends \Controller\AbstractController
 
     public function execute()
     {
-        $surveyName = $this->getParameter('survey');
+        $surveyName = $this->getParameter('survey_name');
         
         $question = RepositoryFetcher::get('Question')
             ->createQuery(array('survey' => $surveyName))

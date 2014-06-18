@@ -14,7 +14,7 @@ class GetNextQuestion extends \Controller\AbstractController
 
     public function execute()
     {
-        $questionName = $this->getParameter('question');
+        $questionName = $this->getParameter('question_name');
         
         $repo = RepositoryFetcher::get('Question');
         $question = $repo->createQuery(array('name' => $questionName))->one();
