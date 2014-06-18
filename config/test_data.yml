@@ -1,0 +1,24 @@
+
+Survey:
+    -
+        name: survey-01
+    -
+        name: survey-02
+        
+Question:
+    -
+        name: question-01
+        title: 'This is the first question'
+        type: boolean
+        references:
+            Survey: 
+                field: survey
+                name: survey-01
+    -
+        name: question-02
+        title: 'This is the second question'
+        type: boolean
+        references:
+            Survey: 
+                field: survey
+                name: survey-01

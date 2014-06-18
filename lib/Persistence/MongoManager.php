@@ -15,6 +15,11 @@ use Configs;
  */
 class MongoManager 
 {
+    const CONNECTION_NAME = 'questions';
+    
+    /**
+     * @var Mandango 
+     */
     private static $instance = null;
     
     public static function getInstance() {
@@ -26,10 +31,11 @@ class MongoManager
                     ROOT_DIR.'/'.Configs::get('cache_dir', 'mandango')
                 )
             );
-            self::$instance->setConnection('default', new Connection(
+            self::$instance->setConnection(self::CONNECTION_NAME, new Connection(
                 Configs::get('connection_string', 'mandango'), 
                 Configs::get('database', 'mandango')
             ));
+            self::$instance->setDefaultConnectionName(self::CONNECTION_NAME);
         }
         return self::$instance;
     }

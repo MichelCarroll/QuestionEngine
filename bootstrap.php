@@ -16,4 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 
 Configs::set(Yaml::parse(file_get_contents(CONFIG_DIR.'/app.yml')));
 FrontController::setRoutes(Yaml::parse(file_get_contents(CONFIG_DIR.'/routing.yml'))['routes']);
-FrontController::dispatch(strtok($_SERVER["REQUEST_URI"],'?'));
+
+if(isset($_SERVER["REQUEST_URI"])) {
+    FrontController::dispatch(strtok($_SERVER["REQUEST_URI"],'?'));
+}

@@ -11,7 +11,7 @@ class RepositoryFetcher
 {
     public static function get($modelName) {
         
-        $className = 'Model\\'.$modelName.'Repository';
+        $className = '\\Model\\'.$modelName.'Repository';
         if(!class_exists($className)) 
         {
             throw new RepositoryNotFoundException();
