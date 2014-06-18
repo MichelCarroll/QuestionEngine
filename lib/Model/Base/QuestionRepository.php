@@ -52,8 +52,6 @@ abstract class QuestionRepository extends \Mandango\Repository
         $inserts = array();
         $updates = array();
         foreach ($documents as $document) {
-            $document->saveReferences();
-            $document->updateReferenceFields();
             if ($document->isNew()) {
                 $inserts[spl_object_hash($document)] = $document;
             } else {
@@ -64,9 +62,6 @@ abstract class QuestionRepository extends \Mandango\Repository
         // insert
         if ($inserts) {
             foreach ($inserts as $oid => $document) {
-                if (!$document->isModified()) {
-                    continue;
-                }
                 $data = $document->queryForSave();
                 $data['_id'] = new \MongoId();
 
@@ -133,21 +128,5 @@ abstract class QuestionRepository extends \Mandango\Repository
      */
     public function fixMissingReferences($documentsPerBatch = 1000)
     {
-        $skip = 0;
-        do {
-            $cursor = $this->getCollection()->find(array('survey' => array('$exists' => 1)), array('survey' => 1))->limit($documentsPerBatch)->skip($skip);
-            $ids = array_unique(array_values(array_map(function ($result) { return $result['survey']; }, iterator_to_array($cursor))));
-            if (count($ids)) {
-                $collection = $this->getMandango()->getRepository('Model\Survey')->getCollection();
-                $referenceCursor = $collection->find(array('_id' => array('$in' => $ids)), array('_id' => 1));
-                $referenceIds =  array_values(array_map(function ($result) { return $result['_id']; }, iterator_to_array($referenceCursor)));
-
-                if ($idsDiff = array_diff($ids, $referenceIds)) {
-                    $this->remove(array('survey' => array('$in' => $idsDiff)), array('multiple' => 1));
-                }
-            }
-
-            $skip += $documentsPerBatch;
-        } while(count($ids));
     }
 }

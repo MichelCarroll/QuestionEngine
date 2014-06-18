@@ -10,17 +10,19 @@ $classes = array(
         'fields' => array(
             'name'   => 'string',
             'title' => 'string',
-            'type'   => 'string'
-        ),
-        'referencesOne' => array(
-            'survey' => array('class' => 'Model\Survey'),
-        ),
-    ),
-    'Model\Survey' => array(
-        'fields' => array(
-            'name'   => 'string'
-        ),
-    ),
+            'type'   => 'string',
+            'survey'   => 'string',
+            'order'   => 'integer'
+        )
+//        'referencesOne' => array(
+//            'survey' => array('class' => 'Model\Survey'),
+//        ),
+    )
+//    'Model\Survey' => array(
+//        'fields' => array(
+//            'name'   => 'string'
+//        ),
+//    ),
 );
 
 

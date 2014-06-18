@@ -52,9 +52,14 @@ abstract class Question extends \Mandango\Document\Document
             $this->data['fields']['type'] = null;
         }
         if (isset($data['survey'])) {
-            $this->data['fields']['survey_reference_field'] = $data['survey'];
+            $this->data['fields']['survey'] = (string) $data['survey'];
         } elseif (isset($data['_fields']['survey'])) {
-            $this->data['fields']['survey_reference_field'] = null;
+            $this->data['fields']['survey'] = null;
+        }
+        if (isset($data['order'])) {
+            $this->data['fields']['order'] = (int) $data['order'];
+        } elseif (isset($data['_fields']['order'])) {
+            $this->data['fields']['order'] = null;
         }
 
         return $this;
@@ -247,65 +252,127 @@ abstract class Question extends \Mandango\Document\Document
     }
 
     /**
-     * Set the "survey_reference_field" field.
+     * Set the "survey" field.
      *
      * @param mixed $value The value.
      *
      * @return \Model\Question The document (fluent interface).
      */
-    public function setSurvey_reference_field($value)
+    public function setSurvey($value)
     {
-        if (!isset($this->data['fields']['survey_reference_field'])) {
+        if (!isset($this->data['fields']['survey'])) {
             if (!$this->isNew()) {
-                $this->getSurvey_reference_field();
-                if ($this->isFieldEqualTo('survey_reference_field', $value)) {
+                $this->getSurvey();
+                if ($this->isFieldEqualTo('survey', $value)) {
                     return $this;
                 }
             } else {
                 if (null === $value) {
                     return $this;
                 }
-                $this->fieldsModified['survey_reference_field'] = null;
-                $this->data['fields']['survey_reference_field'] = $value;
+                $this->fieldsModified['survey'] = null;
+                $this->data['fields']['survey'] = $value;
                 return $this;
             }
-        } elseif ($this->isFieldEqualTo('survey_reference_field', $value)) {
+        } elseif ($this->isFieldEqualTo('survey', $value)) {
             return $this;
         }
 
-        if (!isset($this->fieldsModified['survey_reference_field']) && !array_key_exists('survey_reference_field', $this->fieldsModified)) {
-            $this->fieldsModified['survey_reference_field'] = $this->data['fields']['survey_reference_field'];
-        } elseif ($this->isFieldModifiedEqualTo('survey_reference_field', $value)) {
-            unset($this->fieldsModified['survey_reference_field']);
+        if (!isset($this->fieldsModified['survey']) && !array_key_exists('survey', $this->fieldsModified)) {
+            $this->fieldsModified['survey'] = $this->data['fields']['survey'];
+        } elseif ($this->isFieldModifiedEqualTo('survey', $value)) {
+            unset($this->fieldsModified['survey']);
         }
 
-        $this->data['fields']['survey_reference_field'] = $value;
+        $this->data['fields']['survey'] = $value;
 
         return $this;
     }
 
     /**
-     * Returns the "survey_reference_field" field.
+     * Returns the "survey" field.
      *
      * @return mixed The $name field.
      */
-    public function getSurvey_reference_field()
+    public function getSurvey()
     {
-        if (!isset($this->data['fields']['survey_reference_field'])) {
+        if (!isset($this->data['fields']['survey'])) {
             if ($this->isNew()) {
-                $this->data['fields']['survey_reference_field'] = null;
-            } elseif (!isset($this->data['fields']) || !array_key_exists('survey_reference_field', $this->data['fields'])) {
+                $this->data['fields']['survey'] = null;
+            } elseif (!isset($this->data['fields']) || !array_key_exists('survey', $this->data['fields'])) {
                 $this->addFieldCache('survey');
                 $data = $this->getRepository()->getCollection()->findOne(array('_id' => $this->getId()), array('survey' => 1));
                 if (isset($data['survey'])) {
-                    $this->data['fields']['survey_reference_field'] = $data['survey'];
+                    $this->data['fields']['survey'] = (string) $data['survey'];
                 } else {
-                    $this->data['fields']['survey_reference_field'] = null;
+                    $this->data['fields']['survey'] = null;
                 }
             }
         }
 
-        return $this->data['fields']['survey_reference_field'];
+        return $this->data['fields']['survey'];
+    }
+
+    /**
+     * Set the "order" field.
+     *
+     * @param mixed $value The value.
+     *
+     * @return \Model\Question The document (fluent interface).
+     */
+    public function setOrder($value)
+    {
+        if (!isset($this->data['fields']['order'])) {
+            if (!$this->isNew()) {
+                $this->getOrder();
+                if ($this->isFieldEqualTo('order', $value)) {
+                    return $this;
+                }
+            } else {
+                if (null === $value) {
+                    return $this;
+                }
+                $this->fieldsModified['order'] = null;
+                $this->data['fields']['order'] = $value;
+                return $this;
+            }
+        } elseif ($this->isFieldEqualTo('order', $value)) {
+            return $this;
+        }
+
+        if (!isset($this->fieldsModified['order']) && !array_key_exists('order', $this->fieldsModified)) {
+            $this->fieldsModified['order'] = $this->data['fields']['order'];
+        } elseif ($this->isFieldModifiedEqualTo('order', $value)) {
+            unset($this->fieldsModified['order']);
+        }
+
+        $this->data['fields']['order'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Returns the "order" field.
+     *
+     * @return mixed The $name field.
+     */
+    public function getOrder()
+    {
+        if (!isset($this->data['fields']['order'])) {
+            if ($this->isNew()) {
+                $this->data['fields']['order'] = null;
+            } elseif (!isset($this->data['fields']) || !array_key_exists('order', $this->data['fields'])) {
+                $this->addFieldCache('order');
+                $data = $this->getRepository()->getCollection()->findOne(array('_id' => $this->getId()), array('order' => 1));
+                if (isset($data['order'])) {
+                    $this->data['fields']['order'] = (int) $data['order'];
+                } else {
+                    $this->data['fields']['order'] = null;
+                }
+            }
+        }
+
+        return $this->data['fields']['order'];
     }
 
     private function isFieldEqualTo($field, $otherValue)
@@ -332,51 +399,6 @@ abstract class Question extends \Mandango\Document\Document
     }
 
     /**
-     * Set the "survey" reference.
-     *
-     * @param \Model\Survey|null $value The reference, or null.
-     *
-     * @return \Model\Question The document (fluent interface).
-     *
-     * @throws \InvalidArgumentException If the class is not an instance of Model\Survey.
-     */
-    public function setSurvey($value)
-    {
-        if (null !== $value && !$value instanceof \Model\Survey) {
-            throw new \InvalidArgumentException('The "survey" reference is not an instance of Model\Survey.');
-        }
-
-        $this->setSurvey_reference_field((null === $value || $value->isNew()) ? null : $value->getId());
-
-        $this->data['referencesOne']['survey'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Returns the "survey" reference.
-     *
-     * @return \Model\Survey|null The reference or null if it does not exist.
-     */
-    public function getSurvey()
-    {
-        if (!isset($this->data['referencesOne']['survey'])) {
-            if (!$this->isNew()) {
-                $this->addReferenceCache('survey');
-            }
-            if (!$id = $this->getSurvey_reference_field()) {
-                return null;
-            }
-            if (!$document = $this->getMandango()->getRepository('Model\Survey')->findOneById($id)) {
-                throw new \RuntimeException('The reference "survey" does not exist.');
-            }
-            $this->data['referencesOne']['survey'] = $document;
-        }
-
-        return $this->data['referencesOne']['survey'];
-    }
-
-    /**
      * Process onDelete.
      */
     public function processOnDelete()
@@ -395,26 +417,6 @@ abstract class Question extends \Mandango\Document\Document
     private function processOnDeleteUnset($class, array $criteria, array $update)
     {
         $this->getMandango()->getRepository($class)->update($criteria, $update, array('multiple' => true));
-    }
-
-    /**
-     * Update the value of the reference fields.
-     */
-    public function updateReferenceFields()
-    {
-        if (isset($this->data['referencesOne']['survey']) && !isset($this->data['fields']['survey_reference_field'])) {
-            $this->setSurvey_reference_field($this->data['referencesOne']['survey']->getId());
-        }
-    }
-
-    /**
-     * Save the references.
-     */
-    public function saveReferences()
-    {
-        if (isset($this->data['referencesOne']['survey'])) {
-            $this->data['referencesOne']['survey']->save();
-        }
     }
 
     /**
@@ -438,11 +440,11 @@ abstract class Question extends \Mandango\Document\Document
         if ('type' == $name) {
             return $this->setType($value);
         }
-        if ('survey_reference_field' == $name) {
-            return $this->setSurvey_reference_field($value);
-        }
         if ('survey' == $name) {
             return $this->setSurvey($value);
+        }
+        if ('order' == $name) {
+            return $this->setOrder($value);
         }
 
         throw new \InvalidArgumentException(sprintf('The document data "%s" is not valid.', $name));
@@ -468,11 +470,11 @@ abstract class Question extends \Mandango\Document\Document
         if ('type' == $name) {
             return $this->getType();
         }
-        if ('survey_reference_field' == $name) {
-            return $this->getSurvey_reference_field();
-        }
         if ('survey' == $name) {
             return $this->getSurvey();
+        }
+        if ('order' == $name) {
+            return $this->getOrder();
         }
 
         throw new \InvalidArgumentException(sprintf('The document data "%s" is not valid.', $name));
@@ -499,11 +501,11 @@ abstract class Question extends \Mandango\Document\Document
         if (isset($array['type'])) {
             $this->setType($array['type']);
         }
-        if (isset($array['survey_reference_field'])) {
-            $this->setSurvey_reference_field($array['survey_reference_field']);
-        }
         if (isset($array['survey'])) {
             $this->setSurvey($array['survey']);
+        }
+        if (isset($array['order'])) {
+            $this->setOrder($array['order']);
         }
 
         return $this;
@@ -523,9 +525,8 @@ abstract class Question extends \Mandango\Document\Document
         $array['name'] = $this->getName();
         $array['title'] = $this->getTitle();
         $array['type'] = $this->getType();
-        if ($withReferenceFields) {
-            $array['survey_reference_field'] = $this->getSurvey_reference_field();
-        }
+        $array['survey'] = $this->getSurvey();
+        $array['order'] = $this->getOrder();
 
         return $array;
     }
@@ -550,8 +551,11 @@ abstract class Question extends \Mandango\Document\Document
                 if (isset($this->data['fields']['type'])) {
                     $query['type'] = (string) $this->data['fields']['type'];
                 }
-                if (isset($this->data['fields']['survey_reference_field'])) {
-                    $query['survey'] = $this->data['fields']['survey_reference_field'];
+                if (isset($this->data['fields']['survey'])) {
+                    $query['survey'] = (string) $this->data['fields']['survey'];
+                }
+                if (isset($this->data['fields']['order'])) {
+                    $query['order'] = (int) $this->data['fields']['order'];
                 }
             } else {
                 if (isset($this->data['fields']['name']) || array_key_exists('name', $this->data['fields'])) {
@@ -587,14 +591,25 @@ abstract class Question extends \Mandango\Document\Document
                         }
                     }
                 }
-                if (isset($this->data['fields']['survey_reference_field']) || array_key_exists('survey_reference_field', $this->data['fields'])) {
-                    $value = $this->data['fields']['survey_reference_field'];
-                    $originalValue = $this->getOriginalFieldValue('survey_reference_field');
+                if (isset($this->data['fields']['survey']) || array_key_exists('survey', $this->data['fields'])) {
+                    $value = $this->data['fields']['survey'];
+                    $originalValue = $this->getOriginalFieldValue('survey');
                     if ($value !== $originalValue) {
                         if (null !== $value) {
-                            $query['$set']['survey'] = $this->data['fields']['survey_reference_field'];
+                            $query['$set']['survey'] = (string) $this->data['fields']['survey'];
                         } else {
                             $query['$unset']['survey'] = 1;
+                        }
+                    }
+                }
+                if (isset($this->data['fields']['order']) || array_key_exists('order', $this->data['fields'])) {
+                    $value = $this->data['fields']['order'];
+                    $originalValue = $this->getOriginalFieldValue('order');
+                    if ($value !== $originalValue) {
+                        if (null !== $value) {
+                            $query['$set']['order'] = (int) $this->data['fields']['order'];
+                        } else {
+                            $query['$unset']['order'] = 1;
                         }
                     }
                 }

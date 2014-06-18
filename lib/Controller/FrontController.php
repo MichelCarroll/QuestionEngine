@@ -20,12 +20,23 @@ class FrontController
     public static function dispatch($uri) 
     {
         if(!isset(self::$routes[$uri])) {
-            throw new \Exception('Route not found');
+            http_response_code(404);
+            exit;
         }
         
         $routeClass = self::$routes[$uri];
         $action = new $routeClass();
-        $action->execute();
+        
+        header('Content-Type: application/json');
+        
+        try {
+            $returnValues = $action->execute();
+        } catch (\Exception $ex) {
+            http_response_code(500);
+            echo json_encode(array('error' => $ex->getMessage()));
+            exit;
+        }
+        
+        echo json_encode($returnValues);
     }
-    
 }

@@ -9,6 +9,11 @@ namespace Persistence;
  */
 class RepositoryFetcher 
 {
+    /**
+     * @param string $modelName
+     * @return \Mandango\Repository
+     * @throws RepositoryNotFoundException
+     */
     public static function get($modelName) {
         
         $className = '\\Model\\'.$modelName.'Repository';
