@@ -20,7 +20,7 @@ class Configs {
      * @return mixed
      */
     public static function get($key, $namespace = 'default') {
-        if(isset($key, self::$data[$namespace])) {
+        if(isset($key, self::$data[$namespace][$key])) {
             return self::$data[$namespace][$key];
         }
     }
