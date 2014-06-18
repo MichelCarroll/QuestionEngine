@@ -61,6 +61,11 @@ abstract class Question extends \Mandango\Document\Document
         } elseif (isset($data['_fields']['order'])) {
             $this->data['fields']['order'] = null;
         }
+        if (isset($data['choices'])) {
+            $this->data['fields']['choices'] = $data['choices'];
+        } elseif (isset($data['_fields']['choices'])) {
+            $this->data['fields']['choices'] = null;
+        }
 
         return $this;
     }
@@ -375,6 +380,68 @@ abstract class Question extends \Mandango\Document\Document
         return $this->data['fields']['order'];
     }
 
+    /**
+     * Set the "choices" field.
+     *
+     * @param mixed $value The value.
+     *
+     * @return \Model\Question The document (fluent interface).
+     */
+    public function setChoices($value)
+    {
+        if (!isset($this->data['fields']['choices'])) {
+            if (!$this->isNew()) {
+                $this->getChoices();
+                if ($this->isFieldEqualTo('choices', $value)) {
+                    return $this;
+                }
+            } else {
+                if (null === $value) {
+                    return $this;
+                }
+                $this->fieldsModified['choices'] = null;
+                $this->data['fields']['choices'] = $value;
+                return $this;
+            }
+        } elseif ($this->isFieldEqualTo('choices', $value)) {
+            return $this;
+        }
+
+        if (!isset($this->fieldsModified['choices']) && !array_key_exists('choices', $this->fieldsModified)) {
+            $this->fieldsModified['choices'] = $this->data['fields']['choices'];
+        } elseif ($this->isFieldModifiedEqualTo('choices', $value)) {
+            unset($this->fieldsModified['choices']);
+        }
+
+        $this->data['fields']['choices'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Returns the "choices" field.
+     *
+     * @return mixed The $name field.
+     */
+    public function getChoices()
+    {
+        if (!isset($this->data['fields']['choices'])) {
+            if ($this->isNew()) {
+                $this->data['fields']['choices'] = null;
+            } elseif (!isset($this->data['fields']) || !array_key_exists('choices', $this->data['fields'])) {
+                $this->addFieldCache('choices');
+                $data = $this->getRepository()->getCollection()->findOne(array('_id' => $this->getId()), array('choices' => 1));
+                if (isset($data['choices'])) {
+                    $this->data['fields']['choices'] = $data['choices'];
+                } else {
+                    $this->data['fields']['choices'] = null;
+                }
+            }
+        }
+
+        return $this->data['fields']['choices'];
+    }
+
     private function isFieldEqualTo($field, $otherValue)
     {
         $value = $this->data['fields'][$field];
@@ -446,6 +513,9 @@ abstract class Question extends \Mandango\Document\Document
         if ('order' == $name) {
             return $this->setOrder($value);
         }
+        if ('choices' == $name) {
+            return $this->setChoices($value);
+        }
 
         throw new \InvalidArgumentException(sprintf('The document data "%s" is not valid.', $name));
     }
@@ -475,6 +545,9 @@ abstract class Question extends \Mandango\Document\Document
         }
         if ('order' == $name) {
             return $this->getOrder();
+        }
+        if ('choices' == $name) {
+            return $this->getChoices();
         }
 
         throw new \InvalidArgumentException(sprintf('The document data "%s" is not valid.', $name));
@@ -507,6 +580,9 @@ abstract class Question extends \Mandango\Document\Document
         if (isset($array['order'])) {
             $this->setOrder($array['order']);
         }
+        if (isset($array['choices'])) {
+            $this->setChoices($array['choices']);
+        }
 
         return $this;
     }
@@ -527,6 +603,7 @@ abstract class Question extends \Mandango\Document\Document
         $array['type'] = $this->getType();
         $array['survey'] = $this->getSurvey();
         $array['order'] = $this->getOrder();
+        $array['choices'] = $this->getChoices();
 
         return $array;
     }
@@ -556,6 +633,9 @@ abstract class Question extends \Mandango\Document\Document
                 }
                 if (isset($this->data['fields']['order'])) {
                     $query['order'] = (int) $this->data['fields']['order'];
+                }
+                if (isset($this->data['fields']['choices'])) {
+                    $query['choices'] = $this->data['fields']['choices'];
                 }
             } else {
                 if (isset($this->data['fields']['name']) || array_key_exists('name', $this->data['fields'])) {
@@ -610,6 +690,17 @@ abstract class Question extends \Mandango\Document\Document
                             $query['$set']['order'] = (int) $this->data['fields']['order'];
                         } else {
                             $query['$unset']['order'] = 1;
+                        }
+                    }
+                }
+                if (isset($this->data['fields']['choices']) || array_key_exists('choices', $this->data['fields'])) {
+                    $value = $this->data['fields']['choices'];
+                    $originalValue = $this->getOriginalFieldValue('choices');
+                    if ($value !== $originalValue) {
+                        if (null !== $value) {
+                            $query['$set']['choices'] = $this->data['fields']['choices'];
+                        } else {
+                            $query['$unset']['choices'] = 1;
                         }
                     }
                 }

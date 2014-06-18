@@ -34,6 +34,10 @@ class MetadataFactoryInfo
                     'type' => 'integer',
                     'dbName' => 'order',
                 ),
+                'choices' => array(
+                    'type' => 'raw',
+                    'dbName' => 'choices',
+                ),
             ),
             '_has_references' => false,
             'referencesOne' => array(

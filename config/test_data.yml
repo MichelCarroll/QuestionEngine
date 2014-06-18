@@ -1,6 +1,5 @@
 
 
-
 Question:
     -
         name: question-01
@@ -17,31 +16,10 @@ Question:
     -
         name: question-04
         title: 'This is the first question'
-        type: boolean
+        type: multiple-choice
         survey: survey-01
         order: 4
-
-
-#Survey:
-#    -
-#        name: survey-01
-#    -
-#        name: survey-02
-#        
-#Question:
-#    -
-#        name: question-01
-#        title: 'This is the first question'
-#        type: boolean
-#        references:
-#            Survey: 
-#                field: survey
-#                name: survey-01
-#    -
-#        name: question-02
-#        title: 'This is the second question'
-#        type: boolean
-#        references:
-#            Survey: 
-#                field: survey
-#                name: survey-01
+        choices: 
+            1: 'This one'
+            2: 'That one'
+            3: 'Those Ones'

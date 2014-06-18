@@ -12,8 +12,9 @@ $classes = array(
             'title' => 'string',
             'type'   => 'string',
             'survey'   => 'string',
-            'order'   => 'integer'
-        )
+            'order'   => 'integer',
+            'choices' => 'raw'
+        ),
 //        'referencesOne' => array(
 //            'survey' => array('class' => 'Model\Survey'),
 //        ),
