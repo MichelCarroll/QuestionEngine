@@ -1,0 +1,2 @@
+routes:
+  /getFirstQuestion: Controller\Actions\GetFirstQuestion

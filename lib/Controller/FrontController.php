@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use Configs;
 
 /**
  * Description of FrontController
@@ -11,15 +10,21 @@ use Configs;
  */
 class FrontController 
 {
+    public static $routes = array();
+    
+    public static function setRoutes(array $routes) 
+    {
+        self::$routes = $routes;
+    }
     
     public static function dispatch($uri) 
     {
-        $route = Configs::get($uri, 'routing');
-        if(!$route) {
+        if(!isset(self::$routes[$uri])) {
             throw new \Exception('Route not found');
         }
         
-        $action = new $route();
+        $routeClass = self::$routes[$uri];
+        $action = new $routeClass();
         $action->execute();
     }
     

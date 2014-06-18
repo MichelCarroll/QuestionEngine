@@ -13,6 +13,7 @@ class GetFirstQuestion extends \Controller\AbstractController
     public function execute()
     {
         $surveyName = $this->getParameter('survey');
+        var_dump($surveyName);
     }
     
 }

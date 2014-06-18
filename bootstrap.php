@@ -3,6 +3,7 @@
 require('vendor/autoload.php');
 
 define('ROOT_DIR', __DIR__);
+define('CONFIG_DIR', __DIR__.'/config');
 
 spl_autoload_register(function ($class) {
     include 'lib/' . str_replace('\\', '/', $class) . '.php';
@@ -10,6 +11,9 @@ spl_autoload_register(function ($class) {
 
 error_reporting(E_ALL); ini_set('display_errors', 1);
 
+use Controller\FrontController;
+use Symfony\Component\Yaml\Yaml;
 
-Configs::set(Symfony\Component\Yaml\Yaml::parse(file_get_contents(__DIR__.'/config/app.yml')));
-Controller\FrontController::dispatch(strtok($_SERVER["REQUEST_URI"],'?'));
+Configs::set(Yaml::parse(file_get_contents(CONFIG_DIR.'/app.yml')));
+FrontController::setRoutes(Yaml::parse(file_get_contents(CONFIG_DIR.'/routing.yml'))['routes']);
+FrontController::dispatch(strtok($_SERVER["REQUEST_URI"],'?'));
