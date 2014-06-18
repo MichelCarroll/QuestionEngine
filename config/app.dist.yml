@@ -1,0 +1,4 @@
+mandango:
+  connection_string: mongodb://localhost:27017
+  database: default
+  cache_dir: cache/mandango

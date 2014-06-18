@@ -1,0 +1,9 @@
+{
+    "name": "mcarroll/seedbox",
+    "description": "Questionnaire REST API",
+    "minimum-stability": "dev",
+    "require": {
+        "mandango/mandango": "dev-master",
+        "symfony/yaml": "dev-master"
+    }
+}
