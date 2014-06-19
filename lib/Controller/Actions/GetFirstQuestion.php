@@ -21,12 +21,8 @@ class GetFirstQuestion extends \Controller\AbstractController
             ->sort(array('order' => 1))
             ->one();
         
-        if(!$question) {
-            throw new \InvalidArgumentException('No such question');
-        }
-        
         /* @var $question \Model\Question */       
-        return array('question' => $question->toArray());
+        return array('question' => $question?$question->toArray():null);
     }
     
 }
