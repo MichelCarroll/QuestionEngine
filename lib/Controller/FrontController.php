@@ -33,7 +33,12 @@ class FrontController
             $returnValues = $action->execute();
         } catch (\Exception $ex) {
             http_response_code(500);
-            echo json_encode(array('error' => $ex->getMessage()));
+            echo json_encode(array('error' =>
+                array(
+                    'type' => get_class($ex),
+                    'message' => $ex->getMessage()
+                )
+            ));
             exit;
         }
         

@@ -16,10 +16,56 @@ Question:
     -
         name: question-04
         title: 'This is the first question'
-        type: multiple-choice
+        type: multiple
         survey: survey-01
         order: 4
         choices: 
-            1: 'This one'
-            2: 'That one'
-            3: 'Those Ones'
+            1:
+                title: 'This one'
+            2:  
+                title: 'Those Ones one'
+            3:  
+                title: 'That one'
+    -
+        name: question-06
+        title: 'This is the first question'
+        type: integer
+        survey: survey-01
+        order: 6
+        options:
+            min: 1
+            max: 100
+    -
+        name: question-09
+        title: 'This is the first question'
+        type: integer
+        survey: survey-01
+        order: 8
+        options:
+            min: 1
+            max: 50
+    -
+        name: question-10
+        title: 'This is the first question'
+        type: slider
+        survey: survey-01
+        order: 10
+        options:
+            min: 1
+            max: 100
+    -
+        name: question-14
+        title: 'This is the first question'
+        type: pie
+        survey: survey-01
+        order: 12
+        choices: 
+            1:
+                title: 'This one'
+                default: 25
+            2:  
+                title: 'Those Ones one'
+                default: 25
+            3:  
+                title: 'That one'
+                default: 25

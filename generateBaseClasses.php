@@ -13,17 +13,18 @@ $classes = array(
             'type'   => 'string',
             'survey'   => 'string',
             'order'   => 'integer',
+            'options' => 'raw',
             'choices' => 'raw'
+        )
+    ),
+    'Model\Answer' => array(
+        'fields' => array(
+            'value' => 'raw'
         ),
-//        'referencesOne' => array(
-//            'survey' => array('class' => 'Model\Survey'),
-//        ),
+        'referencesOne' => array(
+            'question' => array('class' => 'Model\Question'),
+        ),
     )
-//    'Model\Survey' => array(
-//        'fields' => array(
-//            'name'   => 'string'
-//        ),
-//    ),
 );
 
 

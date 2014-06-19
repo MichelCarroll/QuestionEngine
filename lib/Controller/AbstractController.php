@@ -7,11 +7,14 @@ abstract class AbstractController
     abstract public function execute();
     
     public function getParameter($name, $required = true) {
-        if($this->isPost()) {
-            $var = filter_input(INPUT_POST, $name, FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        $var = null;
+        
+        if($this->isPost() && isset($_POST[$name])) {
+            $var = $_POST[$name];
         }
-        else {
-            $var = filter_input(INPUT_GET, $name, FILTER_SANITIZE_SPECIAL_CHARS);
+        else if (isset($_GET[$name])){
+            $var = $_GET[$name];
         }
         
         if($required && (is_null($var) || empty($var))) {

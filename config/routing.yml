@@ -2,4 +2,4 @@ routes:
   /getFirstQuestion: Controller\Actions\GetFirstQuestion
   /getNextQuestion: Controller\Actions\GetNextQuestion
   /getAllQuestions: Controller\Actions\GetAllQuestions
-  
+  /answerQuestion: Controller\Actions\AnswerQuestion

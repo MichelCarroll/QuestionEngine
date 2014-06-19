@@ -2,7 +2,7 @@
 
 namespace Persistence;
 
-use Mandango\Cache\FilesystemCache;
+use Mandango\Cache\ArrayCache;
 use Mandango\Connection;
 use Mandango\Mandango;
 use Model\Mapping\MetadataFactory;
@@ -27,9 +27,7 @@ class MongoManager
         {
             self::$instance = new Mandango(
                 new MetadataFactory(), 
-                new FilesystemCache(
-                    ROOT_DIR.'/'.Configs::get('cache_dir', 'mandango')
-                )
+                new ArrayCache()
             );
             self::$instance->setConnection(self::CONNECTION_NAME, new Connection(
                 Configs::get('connection_string', 'mandango'), 

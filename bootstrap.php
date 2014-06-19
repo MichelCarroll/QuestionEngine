@@ -6,7 +6,10 @@ define('ROOT_DIR', __DIR__);
 define('CONFIG_DIR', __DIR__.'/config');
 
 spl_autoload_register(function ($class) {
-    include 'lib/' . str_replace('\\', '/', $class) . '.php';
+    $filename = 'lib/' . str_replace('\\', '/', $class) . '.php';
+    if(file_exists($filename)) {
+        include $filename;
+    }
 });
 
 error_reporting(E_ALL); ini_set('display_errors', 1);

@@ -34,6 +34,10 @@ class MetadataFactoryInfo
                     'type' => 'integer',
                     'dbName' => 'order',
                 ),
+                'options' => array(
+                    'type' => 'raw',
+                    'dbName' => 'options',
+                ),
                 'choices' => array(
                     'type' => 'raw',
                     'dbName' => 'choices',
@@ -42,6 +46,63 @@ class MetadataFactoryInfo
             '_has_references' => false,
             'referencesOne' => array(
 
+            ),
+            'referencesMany' => array(
+
+            ),
+            'embeddedsOne' => array(
+
+            ),
+            'embeddedsMany' => array(
+
+            ),
+            'relationsOne' => array(
+
+            ),
+            'relationsManyOne' => array(
+
+            ),
+            'relationsManyMany' => array(
+
+            ),
+            'relationsManyThrough' => array(
+
+            ),
+            'indexes' => array(
+
+            ),
+            '_indexes' => array(
+
+            ),
+        );
+    }
+
+    public function getModelAnswerClass()
+    {
+        return array(
+            'isEmbedded' => false,
+            'mandango' => null,
+            'connection' => '',
+            'collection' => 'model_answer',
+            'inheritable' => false,
+            'inheritance' => false,
+            'fields' => array(
+                'value' => array(
+                    'type' => 'raw',
+                    'dbName' => 'value',
+                ),
+                'question_reference_field' => array(
+                    'type' => 'raw',
+                    'dbName' => 'question',
+                    'referenceField' => true,
+                ),
+            ),
+            '_has_references' => true,
+            'referencesOne' => array(
+                'question' => array(
+                    'class' => 'Model\\Question',
+                    'field' => 'question_reference_field',
+                ),
             ),
             'referencesMany' => array(
 
