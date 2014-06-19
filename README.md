@@ -7,25 +7,30 @@ Installation
 4. Run `php loadTestData.php` to load data fixtures in the database
 5. Add a virtual host to your local web server, and forward all requests to `bootstrap.php`
 
+
+Services
+=========
+
+###getFirstQuestion(survey_name)
+###getNextQuestion(question_name)
+###getAllQuestion(survey_name)
+###answerQuestion(question_name, value)
+
+
 Question Types
----------------
+==============
 
-##### Boolean
-
+#### Boolean
 True or false question. Expected values: 0, 1
 
-##### Integer
-
+#### Integer
 Requiring a number as an answer. Potentially has a "maximum" and/or "minimum" defined.
 
-##### Multiple
-
+#### Multiple
 Requiring the value to be among the choices in the question.
 
-##### Pie
-
+#### Pie
 Requiring a mapping of choice/values, each value being a ratio of the sum of all values. At least one non-zero value is required.
 
-##### Slider
-
+#### Slider
 Defined the same way as the `Integer` type. The user interface may choose to display it differently.
