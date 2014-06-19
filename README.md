@@ -24,6 +24,8 @@ Installation
 4. Run `php loadTestData.php` to load data fixtures into the database
 5. Add a virtual host to your local web server, and forward all requests to `bootstrap.php`
 
+An easy way to know if all the components are working properly is to visit the address `http://{hostname}/getAllQuestions?survey_name=survey-01`. If the API is working, it will return 7-8 test questions in JSON.
+
 
 Services
 =========
